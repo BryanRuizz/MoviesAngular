@@ -1,0 +1,85 @@
+/* Modal backdrop styling */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh; /* Cambia de 110vh a 100vh */
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+  
+
+  .modal-content {
+    width: 90%;
+    max-width: 600px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Modal body styling */
+  .modal-body {
+    margin-top: 10px;
+  }
+  
+  /* Form group styling */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  /* Form control styling */
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+  }
+  
+
+  .btn {
+    margin-right: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s;
+  }
+  
+
+  .blue-button {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .blue-button:hover {
+    background-color: #0056b3;
+  }
+  
+
+  .image-preview {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .image-preview img {
+    max-width: 100%;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  

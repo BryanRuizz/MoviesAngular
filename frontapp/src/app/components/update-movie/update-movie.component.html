@@ -1,0 +1,84 @@
+<!-- modal -->
+<div *ngIf="isVisible" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Update movie</h4>
+        <button type="button" class="close" aria-label="Close" (click)="onCancel()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSave()">
+          <!-- Input for Title -->
+          <div class="form-group">
+            <label for="title">Titulo:</label>
+            <input
+              id="title"
+              type="text"
+              [(ngModel)]="item.title"
+              name="title"
+              required
+              class="form-control"
+            />
+          </div>
+  
+          <!-- Input for Synopsis -->
+          <div class="form-group">
+            <label for="synopsis">Synopsis:</label>
+            <textarea
+              id="synopsis"
+              [(ngModel)]="item.synopsis"
+              name="synopsis"
+              required
+              class="form-control"
+            ></textarea>
+          </div>
+  
+          <!-- Input for Image URL -->
+          <div class="form-group">
+            <label for="image">Image base64 uri:</label>
+            <input
+              id="image"
+              type="text"
+              [(ngModel)]="item.image"
+              name="image"
+              required
+              class="form-control"
+            />
+          </div>
+  
+          <!-- Input for Actors -->
+          <div class="form-group">
+            <label for="actors">Reparto (Separado con comas):</label>
+            <input
+              id="actors"
+              type="text"
+              [(ngModel)]="item.actors"
+              name="actors"
+              required
+              class="form-control"
+            />
+          </div>
+  
+          <!-- Input for Categories -->
+          <div class="form-group">
+            <label for="categories">Categorias (Separado con comas):</label>
+            <input
+              id="categories"
+              type="text"
+              [(ngModel)]="item.categories"
+              name="categories"
+              required
+              class="form-control"
+            />
+          </div>
+  
+          <div class="form-group">
+            <button type="submit" class="btn blue-button">Save</button>
+            <button type="button" (click)="onCancel()" class="btn btn-secondary">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

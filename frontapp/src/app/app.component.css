@@ -1,0 +1,260 @@
+/* Body and HTML setup */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; 
+  }
+  
+  /* Toolbar styling */
+  .toolbar {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #19a4d2;
+    color: white;
+    font-weight: 600;
+    z-index: 1000; 
+  }
+  
+  /* Toolbar logos */
+  .toolbar img {
+    margin: 0 16px;
+  }
+  
+  .toolbar #twitter-logo {
+    height: 40px;
+    margin: 0 8px;
+  }
+  
+  .toolbar #youtube-logo {
+    height: 40px;
+    margin: 0 16px;
+  }
+  
+  .toolbar #twitter-logo:hover,
+  .toolbar #youtube-logo:hover {
+    opacity: 0.8;
+  }
+  
+  /* Content styling */
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    padding-top: 80px;
+    height: calc(100vh - 60px); 
+    overflow-y: auto; 
+    box-sizing: border-box; 
+  }
+  
+  /* Container styling */
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px; 
+    padding: 16px;
+    width: 100%; 
+    box-sizing: border-box; 
+  }
+  
+  
+  .card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    
+  }
+  
+  .card:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  }
+
+  .card-image {
+    width: 100%; /* Ajusta al ancho del contenedor padre o un ancho fijo si prefieres */
+    height: 400px; /* Altura fija para la imagen */
+    display: flex;
+    justify-content: center; /* Centra la imagen horizontalmente */
+    align-items: center; /* Centra la imagen verticalmente */
+    overflow: hidden; /* Oculta cualquier parte de la imagen que se desborde */
+    border-radius: 8px; /* Bordes redondeados */
+    background-color: #f0f0f0; /* Fondo del contenedor de la imagen */
+}
+
+.card-image img {
+    width: 100%; /* Ajusta el ancho de la imagen al contenedor */
+    height: 100%; /* Ajusta la altura de la imagen al contenedor */
+    object-fit: cover; /* La imagen cubrirá todo el contenedor sin distorsionarse */
+    border-radius: 8px; /* Bordes redondeados si deseas que coincidan con el contenedor */
+}
+
+
+  
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    padding: 2px 2px;
+    flex: 1;
+    /* background: #0056b3; */
+  }
+  
+  .card-id {
+    align-self: center;
+    font-size:12px;
+    /* font-weight: bold; */
+    margin-bottom: 4px;
+  }
+  
+  .sipnasis {
+    background-color: #f0f0f0; /* Gris suave */
+    border-radius: 8px;       /* Bordes redondeados */
+    padding: 10px;            /* Espaciado interno */
+    border: 1px solid #ccc;   /* Borde sutil */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    max-width: 400px;         /* Ancho máximo opcional */
+    margin: 10px;             /* Margen opcional */
+    position: relative;       /* Para posicionar el diálogo si es necesario */
+    font-size: 10px;
+    color: rgb(102, 100, 100);
+  }
+
+  .reparto-container {
+    display: flex;           /* Usa Flexbox para el contenedor */
+    flex-wrap: wrap;         /* Permite que los elementos se envuelvan a la siguiente línea */
+    gap: 5px;               /* Espacio entre los elementos */
+}
+
+.reparto {
+    background-color: #19a4d2; /* Color de fondo */
+    border-radius: 8px;       /* Bordes redondeados */
+    padding: 7px;            /* Espaciado interno */
+    border: 1px solid #ccc;   /* Borde sutil */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    max-width: 49px;          /* Ancho máximo opcional */
+    font-size: 9px;
+    color: white;
+}
+
+  
+  
+  .card-favorite {
+    font-size: 10px;
+    margin-top: auto;
+  }
+  
+  .add-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: #f5f5f5;
+    border-dashed: 2px;
+    border-color: #ccc;
+    border-radius: 8px;
+    height: 100%; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  }
+  
+  .add-card:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  }
+  
+  .plus-icon {
+    font-size: 2rem;
+    color: #007bff;
+  }
+  
+  
+/* Para pantallas con ancho máximo de 768px */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr); /* Dos tarjetas por fila */
+    gap: 16px; /* Espacio entre tarjetas */
+  }
+}
+
+/* Para pantallas con ancho máximo de 480px */
+@media (max-width: 580px) {
+  .container {
+    grid-template-columns: 1fr; /* Una tarjeta por fila */
+    gap: 16px; /* Espacio entre tarjetas */
+  }
+}
+  
+  
+  .selected {
+    border: 2px solid #007bff;
+    transform: scale(1.05); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  }
+  
+  
+  /* Estilos para el footer */
+  .footer {
+    position: fixed; 
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #f5f5f5; 
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); 
+    z-index: 1000; 
+  }
+  
+  /* Estilos para los botones en el footer */
+  .footer-button {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .footer-button .btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px; 
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+    transition: opacity 0.3s;
+  }
+  
+  .footer-button .btn:hover {
+    opacity: 0.8;
+  }
+  
+  .footer-button .btn i {
+    font-size: 18px; 
+  }
+  .blue-button {
+    background-color: #007bff; /* Color azul */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .blue-button:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el cursor */
+  }
+  
