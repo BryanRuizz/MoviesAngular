@@ -2,16 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ServiceService } from './service/service.service';
-import { UpdateMovieComponent } from './components/update-movie/update-movie.component'; 
-import { FormsModule } from '@angular/forms'; 
+import { UpdateMovieComponent } from './components/update-movie/update-movie.component';
+import { FormsModule } from '@angular/forms';
 import { CreateMovieComponent } from './components/create-movie/create-movie.component';
+import { LoginComponent } from './components/login/login.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, UpdateMovieComponent, FormsModule,CreateMovieComponent],
+  imports: [CommonModule, RouterOutlet, UpdateMovieComponent, FormsModule, CreateMovieComponent, LoginComponent],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'] 
+  styleUrls: ['./app.component.css']
 })
 
 export class AppComponent implements OnInit {
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
   ban: boolean = true;
   modalupdate = false;
   modalcreate = false;
+  loginmodal = true;
   data: any[] = [];
   filteredData: any[] = [];
   currentItem: any = { id: 0, name: '', favorite: false };
@@ -28,12 +30,12 @@ export class AppComponent implements OnInit {
   constructor(private apiservice: ServiceService) { }
 
   ngOnInit(): void {
-    this.getdata(); 
+    this.getdata();
   }
 
 
   getdata() {
-    this.Idd=0;
+    this.Idd = 0;
     this.apiservice.getdata().subscribe(data => {
       this.data = data.data;
       // console.log("tiene o no data", this.data);
@@ -56,8 +58,8 @@ export class AppComponent implements OnInit {
     // console.log(id,"idid");
     this.apiservice.deleteData(id).subscribe(response => {
       // console.log("Item deleted successfully", response);
-      this.Idd=0;
-      this.getdata(); 
+      this.Idd = 0;
+      this.getdata();
       this.card(this.Idd)
     }, error => {
       console.error("Error deleting item", error);
@@ -75,31 +77,31 @@ export class AppComponent implements OnInit {
   createtvshow(listen: boolean) {
     this.modalcreate = listen;
     // console.log('Modal Create Open:', this.modalcreate); // Verifica en la consola
-  
+
   }
 
   handlecreate(item: any) {
     // console.log(item);
     this.apiservice.createData(item).subscribe(response => {
       // console.log("Item created successfully", response);
-      this.getdata(); 
+      this.getdata();
     }, error => {
       alert("Verify Endpoint");
       console.error("Error creating item", error);
     });
-    this.modalcreate = false; 
+    this.modalcreate = false;
   }
 
   handleupdate(item: any) {
     // console.log("put",this.Idd,item);
-    this.apiservice.updateData(this.Idd,item).subscribe(response => {
+    this.apiservice.updateData(this.Idd, item).subscribe(response => {
       // console.log("Item updated successfully", response);
 
       this.getdata();
     }, error => {
       console.error("Error updating item", error);
     });
-    this.modalcreate = false; 
+    this.modalcreate = false;
     this.getdata();
   }
 
@@ -119,4 +121,35 @@ export class AppComponent implements OnInit {
     // console.log("bla bla", this.filteredData);
   }
 
-}
+  // USER
+  handleusers(event: { username: string, password: string }) {
+    const { username, password } = event;
+  
+    // Crea el objeto que se enviará al API
+    const payload:any = {
+      user: username,
+      password: password
+    };
+  
+    this.apiservice.user(payload).subscribe(
+      response => {
+        console.log(response.data);
+        if(response.data.success==true){
+        this.loginmodal = false;
+      }
+       
+      },
+      error => {
+        alert("user not found");
+        console.error("Error creating item", error);
+      }
+    );
+  }
+
+
+  
+    
+  }
+
+
+

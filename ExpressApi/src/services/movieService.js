@@ -13,7 +13,7 @@ const getAllmovies = () => {
 }
 
 const createNewMovies = async (newWorkout) => {
-  
+
     const workoutToInsert = {
         ...newWorkout,
         createdAt: new Date().toISOString(), // Usa formato ISO para la fecha
@@ -21,10 +21,10 @@ const createNewMovies = async (newWorkout) => {
     };
 
     try {
-     
+
         const result = await movie.createNewMovie(workoutToInsert);
 
-       
+
         return { success: true, data: { _id: result.insertedId, ...workoutToInsert } };
     } catch (error) {
         console.error("Error creating workout:", error.message);
@@ -35,22 +35,22 @@ const createNewMovies = async (newWorkout) => {
 
 const updateMovie = async (movieid, updateWorkout) => {
     // console.log(movieid,updateWorkout,"ola");
-   
+
     const workoutToUpdate = {
         ...updateWorkout,
         updatedAt: new Date().toISOString()
     };
 
     try {
-       
+
         const result = await movie.updateAMovie(movieid, workoutToUpdate);
 
-       
+
         if (result.matchedCount === 0) {
             return { success: false, message: "No workout found with the given id" };
         }
 
-       
+
         return { success: true, data: result };
     } catch (error) {
         console.error("Error updating workout:", error.message);
@@ -63,5 +63,26 @@ const deleteOneMovie = (info) => {
     const deleteworkout = movie.deleteOnemovie(info);
     return deleteworkout;
 }
+// users
+const existuser = async (info) => {
 
-module.exports = { getAllmovies, createNewMovies, updateMovie, deleteOneMovie };
+    try {
+
+        const result = await movie.existuser(info);
+
+
+        if (result) {
+           
+            return { success: true, message: "User found", data: result };
+        } else {
+         
+            return { success: false, message: "User not found or incorrect information" };
+        }
+    } catch (error) {
+        console.error("Error creating workout:", error.message);
+        return { success: false, message: error.message };
+    }
+
+}
+
+module.exports = { getAllmovies, createNewMovies, updateMovie, deleteOneMovie, existuser };

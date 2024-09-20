@@ -51,6 +51,7 @@ html, body {
     height: calc(100vh - 60px); 
     overflow-y: auto; 
     box-sizing: border-box; 
+    
   }
   
   /* Container styling */

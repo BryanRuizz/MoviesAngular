@@ -1,4 +1,4 @@
-const { getCollection,ObjectId } = require('./db');
+const { getCollection, ObjectId } = require('./db');
 
 
 
@@ -48,11 +48,11 @@ const { getCollection,ObjectId } = require('./db');
 
 const getAllMovies = async () => {
     try {
-        const collection = await getCollection('movies'); 
+        const collection = await getCollection('movies');
         // console.log("Collection obtained:", collection);
 
-     
-        const workouts = await collection.find({}).toArray(); 
+
+        const workouts = await collection.find({}).toArray();
         // console.log("Workouts fetched:", workouts);
 
         return workouts;
@@ -63,19 +63,19 @@ const getAllMovies = async () => {
 };
 
 const createNewMovie = async (newMovie) => {
-    const collection = await getCollection('movies'); 
+    const collection = await getCollection('movies');
 
     const movieToInsert = {
         ...newMovie,
-        createdAt: new Date().toISOString(), 
+        createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
     };
 
     try {
-     
+
         const result = await collection.insertOne(movieToInsert);
 
-        
+
         return { success: true, data: { _id: result.insertedId, ...movieToInsert } };
     } catch (error) {
         console.error("Error creating movie:", error.message);
@@ -95,14 +95,14 @@ const updateAMovie = async (movieid, updateData) => {
 
         const id = new ObjectId(movieid);
 
-       
+
         const beforeUpdate = await collection.findOne({ _id: id });
         console.log("Document before update:", beforeUpdate);
 
-        
+
         const { _id, ...dataToUpdate } = updateData;
 
-        
+
         const result = await collection.updateOne(
             { _id: id },
             { $set: { ...dataToUpdate, updatedAt: new Date() } }
@@ -117,10 +117,10 @@ const updateAMovie = async (movieid, updateData) => {
         if (result.modifiedCount === 0) {
             console.log("No changes were made to the movie");
         } else {
-           
+
             const updatedMovie = await collection.findOne({ _id: id });
             console.log("Movie updated successfully:", updatedMovie);
-            return updatedMovie; 
+            return updatedMovie;
         }
 
     } catch (error) {
@@ -134,18 +134,42 @@ const deleteOnemovie = async (movieid) => {
     // console.log("last step",movieid);
     const collection = await getCollection('movies');
 
-   
+
     const id = new ObjectId(movieid);
 
     // Eliminar de la collecion
     const result = await collection.deleteOne({ _id: id });
 
-   
+
     if (result.deletedCount === 0) {
         return { success: false, message: 'No document found with that ID' };
     }
 
     return { success: true, message: 'Document deleted successfully' };
 };
+// users
 
-module.exports = {  getAllMovies, createNewMovie, updateAMovie, deleteOnemovie };
+const existuser = async (credentials) => {
+    const { username, password } = credentials;
+    console.log("comparacion", username, password);
+    try {
+        const collection = await getCollection('users');
+        console.log("col", collection);
+      
+        const user = await collection.findOne({ username: username, password: password });
+
+        if (user) {
+       
+            return { success: true, message: "Login successful", data: user };
+        } else {
+          
+            return { success: false, message: "User not found or incorrect password" };
+        }
+    } catch (error) {
+        console.error("Error verifying user:", error.message);
+        return { success: false, message: error.message };
+    }
+};
+
+
+module.exports = { getAllMovies, createNewMovie, updateAMovie, deleteOnemovie, existuser };

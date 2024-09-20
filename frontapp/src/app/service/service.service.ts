@@ -19,8 +19,8 @@ export class ServiceService {
     return this.http.delete<any>(url);
   }
 
-  
-  public updateData(id:any,data: any): Observable<any> {
+
+  public updateData(id: any, data: any): Observable<any> {
     // console.log("request update",id,data);
     const url = `${this.urlApi}/${id}`;
     return this.http.patch<any>(url, data);
@@ -29,6 +29,12 @@ export class ServiceService {
   public createData(data: any): Observable<any> {
     return this.http.post<any>(this.urlApi, data);
   }
+  // userlogin
+  public user(data: { username: string; password: string }): Observable<any> {
+    console.log("login", data);
+    const loginUrl = `${this.urlApi}/users/login`;
+    return this.http.post<any>(loginUrl, data);
+  }
 
-  
+
 }

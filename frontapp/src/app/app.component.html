@@ -76,6 +76,8 @@
 
   <app-update-movie [isVisible]="modalupdate" [item]="currentItem" (save)="handleupdate($event)"
     (cancel)="updatecancel()"></app-update-movie>
+  
+    <app-login [isVisible]="loginmodal" (save)="handleusers($event)"></app-login>
 
 
 </div>

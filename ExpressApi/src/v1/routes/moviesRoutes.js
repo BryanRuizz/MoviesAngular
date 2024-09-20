@@ -8,7 +8,6 @@ const movieController = require("../../controllers/movieController");
 const router = express.Router();
 // const cache = apicache.middleware;
 
-
 /**
  * @openapi
  * components:
@@ -24,17 +23,17 @@ const router = express.Router();
  *           type: string
  *         duration:
  *           type: integer
- *         ...
- *     Record:
+ *         # Add other properties as needed
+ *     Users:
  *       type: object
  *       properties:
- *         id:
+ *         _id:
  *           type: string
- *         workoutId:
+ *         username:
  *           type: string
- *         recordType:
+ *         password:
  *           type: string
- *         ...
+ *         # Add other properties as needed
  */
 
 /**
@@ -116,7 +115,6 @@ const router = express.Router();
  *                       example: "Some error message"
  */
 
-
 /**
  * @openapi
  * /api/v1/movies/{movieid}:
@@ -165,7 +163,7 @@ const router = express.Router();
  *                   properties:
  *                     error:
  *                       type: string
- *                       example: "Workout not found"
+ *                       example: "Movie not found"
  *       5XX:
  *         description: FAILED
  *         content:
@@ -216,7 +214,7 @@ const router = express.Router();
  *                   properties:
  *                     error:
  *                       type: string
- *                       example: "movie not found"
+ *                       example: "Movie not found"
  *       5XX:
  *         description: FAILED
  *         content:
@@ -235,11 +233,85 @@ const router = express.Router();
  *                       example: "Some error message"
  */
 
+/**
+ * @openapi
+ * /api/v1/movies/users/login:
+ *   post:
+ *     tags:
+ *       - users
+ *     summary: Login a user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               user:
+ *                 type: string
+ *                 example: "username"
+ *               password:
+ *                 type: string
+ *                 example: "password123"
+ *     responses:
+ *       200:
+ *         description: Login successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: "OK"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     username:
+ *                       type: string
+ *                       example: "username"
+ *                     # Add other user properties as needed
+ *       401:
+ *         description: Invalid credentials
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: "FAILED"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     error:
+ *                       type: string
+ *                       example: "Invalid credentials"
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: "FAILED"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     error:
+ *                       type: string
+ *                       example: "Some error message"
+ */
+
+
 router
     .get("/", movieController.getAllMovies)
     .post("/", movieController.createNewMovie)
     .patch("/:movieId", movieController.updateMovie)
     .delete("/:movieid", movieController.deleteOneMovie)
-
+    .post("/users/login", movieController.existuser)
+    
 module.exports = router;
 
